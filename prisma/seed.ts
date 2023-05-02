@@ -1,6 +1,7 @@
 import { PrismaClient, Prisma } from '@prisma/client'
 
 const prisma = new PrismaClient()
+const booleanOptions = [true, false]
 
 const userData: Prisma.UserCreateInput[] = [
   {
@@ -47,6 +48,42 @@ const userData: Prisma.UserCreateInput[] = [
     },
   },
 ]
+
+
+function createUser(n: number): Prisma.UserCreateInput[] {
+  const users: Prisma.UserCreateInput[] = [];
+  for (let k = 0; k < n; k++) {
+    const user: Prisma.UserCreateInput = {
+      name: `user ${k + 1}`,
+      email: `user${k + 1}@prisma.io`,
+      posts: { create: [] },
+    };
+    users.push(user);
+  }
+  return users;
+}
+
+
+function createPost(n: number): Prisma.PostCreateInput[] {
+  const posts: Prisma.PostCreateInput[] = [];
+  for (let i = 0; i < n; i++) {
+    const post: Prisma.PostCreateInput = {
+      title: `Post ${i + 1}`,
+      content: `Content of post ${i + 1}`,
+      published: booleanOptions[Math.round(Math.random())],
+    };
+    posts.push(post);
+  }
+  return posts;
+}
+
+
+const users: Prisma.UserCreateInput[] = createUser(1000);
+for (const user of users) {
+  if (user.posts != undefined)
+    user.posts.create = createPost(1000);
+}
+
 
 async function main() {
   console.log(`Start seeding ...`)
