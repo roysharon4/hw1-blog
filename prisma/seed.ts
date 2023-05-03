@@ -78,16 +78,16 @@ function createPost(n: number): Prisma.PostCreateInput[] {
 }
 
 
-const users: Prisma.UserCreateInput[] = createUser(1000);
+const users: Prisma.UserCreateInput[] = createUser(10);
 for (const user of users) {
   if (user.posts != undefined)
-    user.posts.create = createPost(1000);
+    user.posts.create = createPost(10);
 }
 
 
 async function main() {
   console.log(`Start seeding ...`)
-  for (const u of userData) {
+  for (const u of users) {
     const user = await prisma.user.create({
       data: u,
     })
