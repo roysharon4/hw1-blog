@@ -63,11 +63,6 @@ type Props = {
 
 const Blog: React.FC<Props> = (props) => {
   const { feed, pageNumber, NumberOfPages } = props;
-  const [currPage, setCurrPage] = useState(pageNumber);
-  const handlePageChange = (newPageNumber: number) => {
-    setCurrPage(newPageNumber);
-    Router.push(`/?page=${newPageNumber}`);
-  };
   return (
     <Layout>
       <div className="page">
@@ -79,7 +74,7 @@ const Blog: React.FC<Props> = (props) => {
             </div>
           ))}
         </main>
-        <PageBar totalPosts={NumberOfPages} setCurrentPage={handlePageChange} currentPage={currPage} />
+        <PageBar totalPosts={NumberOfPages} pageNumber={pageNumber} />
       </div>
       <style jsx>{`
         .post {
