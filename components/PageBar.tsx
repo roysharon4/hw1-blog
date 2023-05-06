@@ -4,25 +4,29 @@ import ReactMarkdown from "react-markdown";
 import Layout from "./Layout";
 
 
-export const PageBar: React.FC<{postPerPage : number, totalPosts : number, setCurrentPage:Function , currentPage:number }> =
- ({postPerPage , totalPosts,setCurrentPage , currentPage}) => {
-    let pages =[];
-    
-    for(let i=1; i<= Math.ceil(totalPosts / postPerPage); i++){
-        pages.push(i)
+export const PageBar: React.FC<{ totalPosts: number, setCurrentPage: Function, currentPage: number }> =
+  ({ totalPosts, setCurrentPage, currentPage }) => {
+    const postPerPage: number = 10;
+    let pages = [];
+
+    for (let i = 1; i <= Math.ceil(totalPosts / postPerPage); i++) {
+      pages.push(i)
     }
 
     return (
-    <Layout>
+      <Layout>
         <div className="pageBar">
-            {
-                pages.map((page:number, index: number)=>{
-                    return <button key={index}
-                    onClick={()=>setCurrentPage(page)}
-                    className={page === currentPage ? 'active' : ''}>
-                         {page}</button>
-                })
-            }
+          {
+            pages.map((page: number, index: number) => {
+              return <button key={index}
+                onClick={() => {
+                  console.log("setCurrentPage called with", page);
+                  setCurrentPage(page)
+                }}
+                className={page === currentPage ? 'active' : ''}>
+                {page}</button>
+            })
+          }
         </div>
         <style jsx>{`
             .pageBar {
@@ -60,7 +64,7 @@ export const PageBar: React.FC<{postPerPage : number, totalPosts : number, setCu
               }
             `}
         </style>
-    </Layout>
+      </Layout>
     );
-}
+  }
 
