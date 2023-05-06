@@ -5,7 +5,6 @@ import Post, { PostProps } from "../components/Post";
 import { PageBar } from "../components/PageBar";
 import prisma from '../lib/prisma'
 import { getSession } from "next-auth/react";
-import Router from "next/router";
 
 export const getServerSideProps: GetServerSideProps = async ({ query, req }) => {
   const postPerPage = 10;
