@@ -40,13 +40,6 @@ export const PageBar: React.FC<{ totalPosts: number, pageNumber: number }> =
             >{currPage + i}</button>
           ))}
           <button
-            key={'last_page'}
-            className={'pageBar_button'}
-            onClick={() => {
-              handlePageChange(Math.min(currPage+5,totalPosts));
-            }}
-            >{'forward'}</button>
-          <button
           key={'<'}
           className={'pageBar_button'}
           onClick={() => {
@@ -54,6 +47,13 @@ export const PageBar: React.FC<{ totalPosts: number, pageNumber: number }> =
             handlePageChange(currPage + 1);
           }}
           >{'>'}</button>
+          <button
+            key={'last_page'}
+            className={'pageBar_button'}
+            onClick={() => {
+              handlePageChange(Math.min(currPage+5,totalPosts));
+            }}
+            >{'forward'}</button>
         </div>
         <style jsx>{`
             .pageBar {
